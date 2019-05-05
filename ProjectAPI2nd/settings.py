@@ -129,6 +129,9 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:9000',
     '127.0.0.1:8080',
     'localhost:8080',
+    'corpus.tugberkgoc.now.sh'
+    'https://corpus.tugberkgoc.now.sh'
+
 )
 
 CORS_ALLOW_HEADERS = (
