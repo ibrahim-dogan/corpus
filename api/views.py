@@ -13,7 +13,7 @@ class FileView(APIView):
     def post(self, request, *args, **kwargs):
         file_serializer = FileSerializer(data=request.data)
         if file_serializer.is_valid():
-            file_serializer.save()
+            # file_serializer.save()
             filename = str(request.data['file'])
             data = cleanAndTokenize(request.data['file'])
             # return Response(file_serializer.data, status=status.HTTP_201_CREATED)
