@@ -36,4 +36,4 @@ class CleanWithParameters(APIView):
 
         data = clean_and_tokenize_v2(file.file, parameters, mostCommon)
 
-        return Response({data})
+        return Response(data, status=status.HTTP_200_OK)
