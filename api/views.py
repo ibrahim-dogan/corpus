@@ -26,7 +26,7 @@ class UploadFile(APIView):
 
 class CleanWithParameters(APIView):
 
-    def get(self, request, format=None):
+    def post(self, request, format=None):
         """
         Return a list of all users.
         """
