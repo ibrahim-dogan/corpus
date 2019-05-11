@@ -3,9 +3,9 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import FileSerializer
+from .bapCleanAndTokenize import cleanAndTokenize, cleanAndTokenizev2
 from .models import File
-
-from .bapCleanAndTokenize import cleanAndTokenize
+from django.http import JsonResponse
 
 
 class UploadFile(APIView):
@@ -14,10 +14,10 @@ class UploadFile(APIView):
     def post(self, request, *args, **kwargs):
         file_serializer = FileSerializer(data=request.data)
         if file_serializer.is_valid():
-            print(file_serializer)
+
             file_serializer.save()
             data = cleanAndTokenize(request.data['file'])
-            #return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+            # return Response(file_serializer.data, status=status.HTTP_201_CREATED)
 
             return Response(data, status=status.HTTP_201_CREATED)
         else:
@@ -30,7 +30,9 @@ class CleanWithParameters(APIView):
         """
         Return a list of all users.
         """
-        # file = File.objects.all().filter('uuid')
+        uuid = request.data['uuid']
+        file = File.objects.all().filter(uuid=uuid)
         # guid = request.data['guid']
+        data = cleanAndTokenizev2(file)
 
-        return Response({"message": "sdg"})
+        return Response({"message": "success", "data": data})
