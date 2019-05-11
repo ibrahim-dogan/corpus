@@ -12,9 +12,9 @@ from nltk.corpus import stopwords
 from nltk.probability import FreqDist
 
 
-def cleanAndTokenize(filename):
-    with open('..\media\\'+filename) as fil:
-        data = json.load(fil)
+def cleanAndTokenize(fil):
+    # with open('..\media\\'+filename) as fil:
+    data = json.load(fil)
 
     nltk.download('stopwords')
     nltk.download('punkt')
