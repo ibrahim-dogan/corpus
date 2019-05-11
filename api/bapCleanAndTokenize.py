@@ -62,8 +62,8 @@ def cleanAndTokenize(fil):
 # print(cleanAndTokenize("UK_afterJaccard.json"))
 
 def cleanAndTokenizev2(filename):
-    with open('..\media\\'+filename) as fil:
-        data = json.load(fil)
+    # with open('..\media\\'+filename) as fil:
+    data = json.load(filename)
 
     nltk.download('stopwords')
     nltk.download('punkt')

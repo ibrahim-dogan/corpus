@@ -30,9 +30,8 @@ class CleanWithParameters(APIView):
         """
         Return a list of all users.
         """
-        uuid = request.data['uuid']
-        file = File.objects.all().filter(uuid=uuid)
+        file = File.objects.get(uuid=request.data['uuid'])
         # guid = request.data['guid']
-        data = cleanAndTokenizev2(file)
+        data = cleanAndTokenizev2(file.file)
 
         return Response({"message": "success", "data": data})

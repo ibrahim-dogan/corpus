@@ -7,5 +7,3 @@ class File(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     uuid = models.CharField(max_length=50, null=False, default="old")
 
-    def __str__(self):
-        return self.file + " " + self.remark
