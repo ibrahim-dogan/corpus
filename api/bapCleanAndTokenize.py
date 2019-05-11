@@ -86,14 +86,14 @@ def cleanAndTokenizev2(filename):
     and return frequency distiribution of tokens of whole corpus
 
     '''
-    p = re.compile(r'nonascii|.com|^https?:\/\/.*[\r\n]*|<.*?>|[^a-zA-Z ]+')
+    # p = re.compile(r'nonascii|.com|^https?:\/\/.*[\r\n]*|<.*?>|[^a-zA-Z ]+')
     stop_words = stopwords.words("english")
 
     data["tokens"] = {}
 
     for docs in data["content"]:
         data["content"][docs] = str(data["content"][docs]).lower()
-        data["content"][docs] = p.sub('', str(data["content"][docs]))
+        # data["content"][docs] = p.sub('', str(data["content"][docs]))
         data["content"][docs] = " ".join(data["content"][docs].split())
         data["tokens"][docs] = nltk.word_tokenize(str(data["content"][docs]))
         data["tokens"][docs] = [word.lower() for word in data["tokens"][docs] if word.isalpha() if

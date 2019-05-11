@@ -31,6 +31,8 @@ class CleanWithParameters(APIView):
         Return a list of all users.
         """
         file = File.objects.get(uuid=request.data['uuid'])
+        parameters = request.data['checkboxes']
+        print()
         # guid = request.data['guid']
         data = cleanAndTokenizev2(file.file)
 
