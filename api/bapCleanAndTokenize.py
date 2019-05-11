@@ -108,4 +108,4 @@ def cleanAndTokenizev2(filename):
     # js =json.dumps(js)
     return js
 
-print(cleanAndTokenizev2("UK_afterJaccard.json"))
+# print(cleanAndTokenizev2("UK_afterJaccard.json"))
