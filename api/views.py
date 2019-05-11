@@ -3,7 +3,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import FileSerializer
-from .bapCleanAndTokenize import cleanAndTokenize, cleanAndTokenizev2
+from .bapCleanAndTokenize import clean_and_tokenize, clean_and_tokenize_v2
 from .models import File
 from django.http import JsonResponse
 
@@ -16,7 +16,7 @@ class UploadFile(APIView):
         if file_serializer.is_valid():
 
             file_serializer.save()
-            data = cleanAndTokenize(request.data['file'])
+            data = clean_and_tokenize(request.data['file'])
             # return Response(file_serializer.data, status=status.HTTP_201_CREATED)
 
             return Response(data, status=status.HTTP_201_CREATED)
@@ -32,8 +32,8 @@ class CleanWithParameters(APIView):
         """
         file = File.objects.get(uuid=request.data['uuid'])
         parameters = request.data['checkboxes']
-        print()
+        print(parameters)
         # guid = request.data['guid']
-        data = cleanAndTokenizev2(file.file)
+        data = clean_and_tokenize_v2(file.file,parameters)
 
-        return Response({"message": "success", "data": data})
+        return Response({data})
