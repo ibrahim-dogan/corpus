@@ -73,17 +73,21 @@ def clean_and_tokenize_v2(filename, parameters,mostCommon):
     stop_words = stopwords.words("english")
 
     data["tokens"] = {}
+
+
+
     for parameter in parameters:
+        print(parameter)
         if parameter == 'STOP WORDS':
             for docs in data["content"]:
+                data["tokens"][docs] = nltk.word_tokenize(str(data["content"][docs]))
                 data["tokens"][docs] = [word.lower() for word in data["tokens"][docs] if word.isalpha() if
-                                word not in stop_words]
+                                        word not in stop_words]
         if parameter == 'NON-ASCII':
             for docs in data["content"]:
                 data["content"][docs] = str(data["content"][docs]).lower()
                 data["content"][docs] = p.sub('', str(data["content"][docs]))
                 data["content"][docs] = " ".join(data["content"][docs].split())
-                data["tokens"][docs] = nltk.word_tokenize(str(data["content"][docs]))
 
     data["tok"] = nltk.word_tokenize(str(data["content"]))
 
