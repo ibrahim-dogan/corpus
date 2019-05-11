@@ -62,7 +62,7 @@ def clean_and_tokenize(fil):
 
 # print(cleanAndTokenize("UK_afterJaccard.json"))
 
-def clean_and_tokenize_v2(filename, parameters):
+def clean_and_tokenize_v2(filename, parameters,mostCommon):
     # with open('..\media\\'+filename) as fil:
     data = json.load(filename)
 
@@ -90,6 +90,6 @@ def clean_and_tokenize_v2(filename, parameters):
     data["tok"] = [word.lower() for word in data["tok"] if word.isalpha() if word not in stop_words]
     dist = FreqDist(data["tok"])
     del data["tok"]
-    js = dist.most_common(100)  # 10 is arbitrary I could send whole data and it can be deduced in FE
+    js = dist.most_common(mostCommon)  # 10 is arbitrary I could send whole data and it can be deduced in FE
     # js =json.dumps(js)
     return js
