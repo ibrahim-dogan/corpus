@@ -32,8 +32,8 @@ class CleanWithParameters(APIView):
         """
         file = File.objects.get(uuid=request.data['uuid'])
         parameters = request.data['checkboxes']
-        mostCommon = request.data['mostCommon']
+        most_common = request.data['mostCommon']
 
-        data = clean_and_tokenize_v2(file.file, parameters, mostCommon)
+        data = clean_and_tokenize_v2(file.file, parameters, most_common)
 
         return Response(data, status=status.HTTP_200_OK)
