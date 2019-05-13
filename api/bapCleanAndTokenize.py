@@ -12,9 +12,9 @@ from nltk.corpus import stopwords
 from nltk.probability import FreqDist
 
 
-def clean_and_tokenize(fil):
+def clean_and_tokenize(file):
     # with open('..\media\\'+filename) as fil:
-    data = json.load(fil)
+    data = json.load(file)
 
     nltk.download('stopwords')
     nltk.download('punkt')
@@ -60,40 +60,59 @@ def clean_and_tokenize(fil):
     return js
 
 
-# print(cleanAndTokenize("UK_afterJaccard.json"))
-
-def clean_and_tokenize_v2(filename, parameters,mostCommon):
+def clean_and_tokenize_v2(file, parameters, most_common):
     # with open('..\media\\'+filename) as fil:
-    data = json.load(filename)
+    data = json.load(file)
 
     nltk.download('stopwords')
     nltk.download('punkt')
 
+    remove_stopwords = False
+    remove_punct = False
+
+    for parameter in parameters:
+        if parameter == 'Stop Words':
+            remove_stopwords = True
+        if parameter == 'Punctuations':
+            remove_punct = True
+    '''
+    data will come as json from FE with colnames(fileupload)
+
+    -content
+    -date
+    -docid
+    -source
+    -title
+
+    and create columns called tokens and tok 
+
+    tokens in relative tokens tok is whole corpus
+
+    tok column is deleted after operation
+
+    and return frequency distiribution of tokens of whole corpus
+
+    '''
     p = re.compile(r'nonascii|.com|^https?:\/\/.*[\r\n]*|<.*?>|[^a-zA-Z ]+')
     stop_words = stopwords.words("english")
 
     data["tokens"] = {}
 
-
-
-    for parameter in parameters:
-        print(parameter)
-        if parameter == 'STOP WORDS':
-            for docs in data["content"]:
-                data["tokens"][docs] = nltk.word_tokenize(str(data["content"][docs]))
-                data["tokens"][docs] = [word.lower() for word in data["tokens"][docs] if word.isalpha() if
-                                        word not in stop_words]
-        if parameter == 'NON-ASCII':
-            for docs in data["content"]:
-                data["content"][docs] = str(data["content"][docs]).lower()
-                data["content"][docs] = p.sub('', str(data["content"][docs]))
-                data["content"][docs] = " ".join(data["content"][docs].split())
+    for docs in data["content"]:
+        data["content"][docs] = str(data["content"][docs]).lower()
+        if remove_punct:
+            data["content"][docs] = p.sub('', str(data["content"][docs]))
+        data["content"][docs] = " ".join(data["content"][docs].split())
+        data["tokens"][docs] = nltk.word_tokenize(str(data["content"][docs]))
+        if remove_stopwords:
+            data["tokens"][docs] = [word.lower() for word in data["tokens"][docs] if word.isalpha() if
+                                    word not in stop_words]
 
     data["tok"] = nltk.word_tokenize(str(data["content"]))
-
-    data["tok"] = [word.lower() for word in data["tok"] if word.isalpha() if word not in stop_words]
+    if remove_stopwords:
+        data["tok"] = [word.lower() for word in data["tok"] if word not in stop_words]
     dist = FreqDist(data["tok"])
     del data["tok"]
-    js = dist.most_common(mostCommon)  # 10 is arbitrary I could send whole data and it can be deduced in FE
-    # js =json.dumps(js)
+    js = dist.most_common(most_common)  # 10 is arbitrary I could send whole data and it can be deduced in FE
+    # js = json.dumps(js)
     return js

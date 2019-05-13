@@ -30,10 +30,10 @@ class CleanWithParameters(APIView):
         """
         Return a list of all users.
         """
-        file = File.objects.get(uuid=request.data['uuid'])
+        document = File.objects.get(uuid=request.data['uuid'])
         parameters = request.data['checkboxes']
         most_common = int(request.data['mostCommon'])
 
-        data = clean_and_tokenize_v2(file.file, parameters, most_common)
+        data = clean_and_tokenize_v2(document.file, parameters, most_common)
 
         return Response(data, status=status.HTTP_200_OK)
