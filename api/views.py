@@ -41,7 +41,7 @@ class CleanWithParameters(APIView):
 
 class Query(APIView):
 
-    def get(self, request, format=None):
+    def post(self, request, format=None):
         """
         Return a list of all users.
         """
