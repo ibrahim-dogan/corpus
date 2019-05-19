@@ -5,7 +5,7 @@ from rest_framework import status
 from .serializers import FileSerializer
 from .bapCleanAndTokenize import clean_and_tokenize, clean_and_tokenize_v2
 from .models import File
-from django.http import JsonResponse
+import json
 
 
 class UploadFile(APIView):
@@ -37,3 +37,16 @@ class CleanWithParameters(APIView):
         data = clean_and_tokenize_v2(document.file, parameters, most_common)
 
         return Response(data, status=status.HTTP_200_OK)
+
+
+class Query(APIView):
+
+    def get(self, request, format=None):
+        """
+        Return a list of all users.
+        """
+        query = request.data['query']
+        query_set = File.objects.filter(file__contains=query)
+        dictionaries = [obj.as_dict() for obj in query_set]
+        test = json.dumps({"data": dictionaries})
+        return Response(test, status=status.HTTP_200_OK)
