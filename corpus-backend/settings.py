@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-ROOT_URLCONF = 'ProjectAPI2nd.urls'
+ROOT_URLCONF = 'corpus-backend.urls'
 
 TEMPLATES = [
     {
