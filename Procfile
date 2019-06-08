@@ -1,1 +1,1 @@
-web: gunicorn ProjectAPI2nd.wsgi
+web: gunicorn corpus-backend.wsgi
