@@ -3,7 +3,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import FileSerializer
-from .bapCleanAndTokenize import clean_and_tokenize, clean_and_tokenize_v2
+from nlp.bapCleanAndTokenize import clean_and_tokenize, clean_and_tokenize_v2
 from .models import File
 import json
 

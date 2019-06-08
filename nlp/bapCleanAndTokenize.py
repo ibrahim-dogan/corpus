@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat May  4 12:26:40 2019
-
-@author: ogulcan
-"""
 import re
 import json
 import nltk
@@ -19,24 +12,6 @@ def clean_and_tokenize(file):
     nltk.download('stopwords')
     nltk.download('punkt')
 
-    '''
-    data will come as json from FE with colnames(fileupload)
-    
-    -content
-    -date
-    -docid
-    -source
-    -title
-    
-    and create columns called tokens and tok 
-    
-    tokens in relative tokens tok is whole corpus
-    
-    tok column is deleted after operation
-    
-    and return frequency distiribution of tokens of whole corpus
-    
-    '''
     p = re.compile(r'nonascii|.com|^https?:\/\/.*[\r\n]*|<.*?>|[^a-zA-Z ]+')
     stop_words = stopwords.words("english")
 
@@ -75,24 +50,7 @@ def clean_and_tokenize_v2(file, parameters, most_common):
             remove_stopwords = True
         if parameter == 'Punctuations':
             remove_punct = True
-    '''
-    data will come as json from FE with colnames(fileupload)
 
-    -content
-    -date
-    -docid
-    -source
-    -title
-
-    and create columns called tokens and tok 
-
-    tokens in relative tokens tok is whole corpus
-
-    tok column is deleted after operation
-
-    and return frequency distiribution of tokens of whole corpus
-
-    '''
     p = re.compile(r'nonascii|.com|^https?:\/\/.*[\r\n]*|<.*?>|[^a-zA-Z ]+')
     stop_words = stopwords.words("english")
 
