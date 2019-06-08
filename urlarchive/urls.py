@@ -1,7 +1,7 @@
-"""ProjectAPI2nd URL Configuration
+"""mydashboard URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
+    https://docs.djangoproject.com/en/2.1/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -13,17 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include
-from django.conf import settings
-from django.conf.urls.static import static
+from .views import urls, new_url, new_cat
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
-    path('', include('urlarchive.urls')),
+    # url('urlarchive', get_urls, name='get_urls'),
+    path('', urls, name='get_urls'),
+    path('newurl', new_url, name='newURL'),
+    path('newcat', new_cat, name='newCAT')
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
