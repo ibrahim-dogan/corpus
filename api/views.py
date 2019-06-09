@@ -12,6 +12,7 @@ import json
 
 class UploadFile(APIView):
     parser_classes = (MultiPartParser, FormParser)
+    permission_classes = (AllowAny,)
 
     def post(self, request, *args, **kwargs):
         file_serializer = FileSerializer(data=request.data)
