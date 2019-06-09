@@ -24,15 +24,13 @@ import pyLDAvis.gensim
 import os, re, operator, warnings
 
 warnings.filterwarnings('ignore')  # Let's not pay heed to them right now
-% matplotlib
-inline
 
 import sklearn
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.decomposition import NMF, LatentDirichletAllocation
 
-with open("D:/Google Drive/BAP/text_analysis/UK_afterJaccard.json") as datafile:
+with open("/home/abraham/PycharmProjects/corpus-backend/media/UK_afterJaccard_SeDMiZa.json") as datafile:
     data = json.load(datafile)
 
 do = data["content"]
@@ -260,4 +258,3 @@ lda = LatentDirichletAllocation(n_topics=no_topics, max_iter=5, learning_method=
 no_top_words = 10
 display_topics(nmf, tfidf_feature_names, no_top_words)
 display_topics(lda, tf_feature_names, no_top_words)
-

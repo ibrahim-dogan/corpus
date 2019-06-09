@@ -1,7 +1,9 @@
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
+
 from .serializers import FileSerializer
 from nlp.bapCleanAndTokenize import clean_and_tokenize, clean_and_tokenize_v2
 from .models import File
@@ -48,5 +50,14 @@ class Query(APIView):
         query = request.data['query']
         query_set = File.objects.filter(file__contains=query)
         dictionaries = [obj.as_dict() for obj in query_set]
-        test = json.dumps({"data": dictionaries})
-        return Response(test, status=status.HTTP_200_OK)
+        data = json.dumps({"data": dictionaries})
+        return Response(data, status=status.HTTP_200_OK)
+
+
+class Test(APIView):
+    permission_classes = (AllowAny,)
+
+    # https://www.django-rest-framework.org/api-guide/permissions/
+
+    def get(self, request, format=None):
+        return Response("asfasd", status=status.HTTP_200_OK)
